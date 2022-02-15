@@ -2,6 +2,8 @@
   <div class="m-3">
         <h3>Products <b-button v-if="chosenProducts.length>=1" variant="dark" v-b-modal="'cart-modal'">Open Cart</b-button></h3>
         <template v-if="!fetchingProducts">
+          <b-alert v-if="message" show variant="success">{{message}}</b-alert>
+          <b-alert v-if="error" show variant="danger">{{error}}</b-alert>
           <b-card-group class="products-container">
             <Product @addedToCart="handleAddToCart" v-for="product in products" :product="product" v-bind:key="product.id"/>
             
@@ -17,6 +19,9 @@
 
 
       <b-modal ref="cart-modal" id="cart-modal" hide-footer :title="`Cart (${chosenProducts.length})`" v-if="chosenProducts.length>=1">
+        <b-alert v-if="error" show variant="danger">{{error}}</b-alert>
+        <b-alert v-if="message" show variant="success">{{message}}</b-alert>
+
         <div class="flex flex-column flex-stretch">
           <CartProduct v-for="product in chosenProducts" 
             :product="product.product"
@@ -53,6 +58,8 @@ export default {
       processingCheckout: false,
       contract: {},
       products: [],
+      error: null,
+      message: null,
       chosenProducts: [],
       notifiedHashes:[],
     };
@@ -87,14 +94,22 @@ export default {
       ).then(
           (tx)=>{
             console.log(tx)
+            this.message="The purchase was successful.";
+            this.error = null;
             this.chosenProducts=[]
             this.processingCheckout=false;
           }
-      ).catch(err=>console.log(err));
+      ).catch(err=>{
+        this.message = null;
+        this.error = err.message;
+        this.processingCheckout = false;
+        console.log(err)
+      });
       
 
     },
     handleAddToCart: function(product){
+      this.makeToast(`New product added to cart`,'success',`You added ${product.amount} of ${product.product.name} to your cart. Proceed to checkout.`);
       this.chosenProducts.push(product)
     },
     getAllProducts: function() {
@@ -114,7 +129,11 @@ export default {
             this.products = this.products.filter((product)=>product.canBeBought)
             this.fetchingProducts=false;
           }
-        );
+        ).catch((err)=>{
+          this.fetchingProducts = false;
+          this.error = "Couldn't get the products from the contract. This contract only works in Ethereum's Ropsten network. Are you sure you are connected to metamask using the Ropsten network?";
+          this.message = null;
+        });
     },
     handleNewProductStored: function(event){
       if(this.notifiedHashes.includes(event.signature))return;

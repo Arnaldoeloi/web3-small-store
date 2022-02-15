@@ -28,10 +28,9 @@
         <b-alert v-if="error" show variant="danger">{{error}}</b-alert>
         <b-alert v-if="message" show variant="success">{{message}}</b-alert>
         <div v-if="isProcessingEdition">
-            <span>Loading changes </span>
             <b-spinner label="Spinning"></b-spinner>
         </div>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show && !isProcessingEdition || !isProcessingRemoval">
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show && !isProcessingEdition">
             <b-form-group
                 id="input-group-1"
                 label="Product name"

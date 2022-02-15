@@ -5,7 +5,6 @@
         <b-card v-for="(product,index) in products" :key="index"
             :img-src="product.img_link" 
             img-alt="Product image" 
-
             style="overflow:none"
             img-left 
             img-width="150px"

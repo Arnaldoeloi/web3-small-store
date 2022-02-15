@@ -135,7 +135,7 @@ export default {
       this.notifiedHashes.push(event.signature);
       console.log('handlePurchaseWasMadeEvent: ',event.returnValues[1].productId);
 
-      event.returnValues[1][1].forEach( (id,index)=>{
+      event.returnValues[1][0].forEach( (id,index)=>{
           this.products = this.products.map((product)=>{
             if(product.id==id){
               console.log(product);

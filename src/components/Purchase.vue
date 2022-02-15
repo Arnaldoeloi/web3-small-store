@@ -2,7 +2,7 @@
     <div class="mt-4 rounded p-5 bg-dark text-white">
         <h4>Purchase #{{id}} - Made in {{ date }}</h4>
         <p>Bought for <span><img src="../assets/ethereum.png" alt="EthIcon">{{ totalInEthers }} ETH</span></p><br>
-        <b-card v-for="product in products" :key="product.id"
+        <b-card v-for="(product,index) in products" :key="index"
             :img-src="product.img_link" 
             img-alt="Product image" 
 
@@ -12,7 +12,7 @@
             bg-variant="dark"
             text-variant="white"
             class="mb-3 mx-auto img-thumbnail"
-            :title="product.name"
+            :title="`${amounts[index]}x ${product.name}`"
             >
             <b-card-text>
                 <b-card-text>

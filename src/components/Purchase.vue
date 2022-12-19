@@ -66,7 +66,7 @@ export default {
             return this.weiToEthers(this.total);
         },
         linkToTxHash: function(){
-            return `https://ropsten.etherscan.io/tx/${this.txHash}`;
+            return `https://goerli.etherscan.io/tx/${this.txHash}`;
         }
     },
 };

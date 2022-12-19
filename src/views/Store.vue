@@ -131,7 +131,7 @@ export default {
           }
         ).catch((err)=>{
           this.fetchingProducts = false;
-          this.error = "Couldn't get the products from the contract. This contract only works in Ethereum's Ropsten network. Are you sure you are connected to metamask using the Ropsten network?";
+          this.error = "Couldn't get the products from the contract. This contract only works in Ethereum's Goerli network. Are you sure you are connected to metamask using the Goerli network?";
           this.message = null;
         });
     },

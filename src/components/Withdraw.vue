@@ -7,12 +7,12 @@
     </div>
     <div class="card-body">
         <h5 class="card-title"><img src="../assets/ethereum.png" alt="EthIcon">{{balanceInEthers}} ETH</h5>
-        <p class="card-text">Only the owner (<span class="text-success"><b-link target="_blank" :href="`https://ropsten.etherscan.io/address/${ownerAddress}`">{{ownerAddress}}</b-link></span>) can withdraw the balance.</p>
+        <p class="card-text">Only the owner (<span class="text-success"><b-link target="_blank" :href="`https://goerli.etherscan.io/address/${ownerAddress}`">{{ownerAddress}}</b-link></span>) can withdraw the balance.</p>
         <b-button v-if="!fetching" @click="withdraw" variant="info"><b-icon icon="box-arrow-in-up"/> Withdraw</b-button>
         <b-spinner v-else label="Spinning"></b-spinner>
     </div>
     <div class="card-footer text-muted">
-        <b-link target="_blank" :href="`https://ropsten.etherscan.io/address/${contractAddress}`">See on Etherscan</b-link>
+        <b-link target="_blank" :href="`https://goerli.etherscan.io/address/${contractAddress}`">See on Etherscan</b-link>
     </div>
     
 </div>

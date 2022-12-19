@@ -14,7 +14,7 @@ import router from './router'
 Vue.config.productionTip = false
 // const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 // console.log(web3);
-const contractAddress = "0x6096d993911835be78c09De6d2420334d1f04A11";
+const contractAddress = "0x82E54bFba0373893Dc7Fb10B40f97dC0999F8Dfb";
 
 const DApp = {
   web3: null,
